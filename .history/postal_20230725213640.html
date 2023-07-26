@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Postal Code Validation</title>
+  <style>
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Postal Code Validation</h1>
+  <form onsubmit="return validateForm()">
+    <label for="postalCode">Postal Code (e.g., M5W 1E6):</label>
+    <input type="text" id="postalCode" name="postalCode" required>
+    <span class="error" id="postalCodeError"></span>
+    <br>
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    function validateForm() {
+      var postalCodeInput = document.getElementById("postalCode");
+      var postalCodeError = document.getElementById("postalCodeError");
+
+      // Remove any whitespace from the input value
+      var postalCode = postalCodeInput.value.replace(/\s/g, '');
+
+      // Regular expression to match "ANA NAN" format
+      var postalCodePattern = /^[A-Za-z]\d[A-Za-z]\d[A-Za-z]\d$/;
+
+      if (!postalCodePattern.test(postalCode)) {
+        postalCodeError.textContent = "Postal Code should be in the format 'ANA NAN' (e.g., M5W 1E6)";
+        return false;
+      } else {
+        postalCodeError.textContent = ""; // Clear the error message if valid
+      }
+
+      // Other form validation logic can go here (if needed)
+
+      return true; // Form will submit if all validations pass
+    }
+  </script>
+</body>
+
+</html>
